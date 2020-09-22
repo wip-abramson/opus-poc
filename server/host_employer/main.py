@@ -4,7 +4,7 @@ from agent_controller import initialise
 import asyncio
 
 loop = asyncio.get_event_loop()
-loop.create_task(initialise())
+loop.run_until_complete(initialise())
 
 app = web.Application()
 setup_routes(app)

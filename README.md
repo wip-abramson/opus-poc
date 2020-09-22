@@ -7,5 +7,5 @@ You must have docker installed to run this project.
 To start run `./manage up`
 
 Front End: [http://localhost:3000](http://localhost:3000)
-Server: [http://localhost:8080/](http://localhost:8080/)
+Server: [http://localhost:8000/](http://localhost:8000/)
 Agent: [http://localhost:8011/api/doc](http://localhost:8011/api/doc)
