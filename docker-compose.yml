@@ -5,8 +5,11 @@ services:
     build:
       context: client
       dockerfile: Dockerfile
+    volumes:
+      - ./client/src:/usr/src/app/src
     ports:
       - 3000:3000
+
   server:
     build:
       context: server
