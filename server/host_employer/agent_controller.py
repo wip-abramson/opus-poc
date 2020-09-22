@@ -1,6 +1,7 @@
 
 import os
 import colored
+import time
 from aries_basic_controller import AriesAgentController
 from aries_basic_controller.controllers.connections import ConnectionsController
 
@@ -36,10 +37,12 @@ def connections_handler(payload):
     connection_id = payload["connection_id"]
     print("Connection message", payload, connection_id)
     STATE = payload['state']
-    if STATE == 'active':
-        #         print('Connection {0} changed state to active'.format(connection_id))
-        print(colored("Connection {0} changed state to active".format(connection_id), "red", attrs=["bold"]))
-
+    print(colored("Current state for ConnectionId {} is {}".format(connection_id, STATE), "magenta", attrs=["bold"]))
+    while STATE != 'active':
+        print(colored("ConnectionId {0} is not in active state yet".format(connection_id), "yellow", attrs=["bold"]))
+        trust_ping = await agent_controller.messaging.trust_ping(connection_id, 'hello!')
+        print(colored("Trust ping send to ConnectionId {0} to activate connection".format(trust_ping), "blue",attrs=["bold"]))
+        time.sleep(5)
 
 connection_listener = {
     "handler": connections_handler,
