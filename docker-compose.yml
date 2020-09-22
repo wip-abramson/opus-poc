@@ -12,9 +12,15 @@ services:
       context: server
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8000:8000
       - ${HOST_WEBHOOK_PORT}:${HOST_WEBHOOK_PORT}
+
+    environment:
+      WEBHOOK_HOST: 0.0.0.0
+      ADMIN_URL: http://host-employer-agent:${HOST_ADMIN_PORT}
+      WEBHOOK_PORT: ${HOST_WEBHOOK_PORT}
     command: "python host_employer/main.py"
+
   ngrok-host-employer:
     image: wernight/ngrok
     command: ngrok http host-employer-agent:${HOST_HTTP_PORT} --log stdout
@@ -25,7 +31,7 @@ services:
     environment:
       NGROK_NAME: ngrok-host-employer
       AGENT_NAME: Blackpool Teaching Hospital
-      PORT: ${LEAD_HTTP_PORT}
+      PORT: ${HOST_HTTP_PORT}
       ADMIN_PORT: ${HOST_ADMIN_PORT}
       WEBHOOK_URL: ${HOST_WEBHOOK_URL}
     ports:

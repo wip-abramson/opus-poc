@@ -2,11 +2,13 @@
 import os
 import colored
 from aries_basic_controller import AriesAgentController
+from aries_basic_controller.controllers.connections import ConnectionsController
 
 WEBHOOK_HOST = os.getenv('WEBHOOK_HOST')
 WEBHOOK_PORT = os.getenv('WEBHOOK_PORT')
 WEBHOOK_BASE = os.getenv('WEBHOOK_BASE')
 ADMIN_URL = os.getenv('ADMIN_URL')
+print(ADMIN_URL)
 
 agent_controller = AriesAgentController(webhook_host=WEBHOOK_HOST, webhook_port=WEBHOOK_PORT,
                                        webhook_base=WEBHOOK_BASE, admin_url=ADMIN_URL)
@@ -50,3 +52,5 @@ async def initialise():
     await agent_controller.listen_webhooks()
 
     agent_controller.register_listeners([cred_listener, connection_listener], defaults=True)
+
+
