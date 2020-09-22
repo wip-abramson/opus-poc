@@ -1,0 +1,4 @@
+aiohttp
+gunicorn
+aries-basic-controller
+colored
