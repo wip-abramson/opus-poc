@@ -13,7 +13,7 @@ COPY yarn.lock ./
 RUN npm install
  
 # Copies everything over to Docker environment
-COPY . .
+ADD . .
 
  
 # Finally runs the application
