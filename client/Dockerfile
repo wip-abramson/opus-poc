@@ -11,10 +11,9 @@ COPY package.json ./
 COPY yarn.lock ./
 # Installs all node packages
 RUN npm install
- 
-# Copies everything over to Docker environment
-ADD . .
 
- 
+# Copies everything over to Docker environment
+ADD public public
+
 # Finally runs the application
 CMD [ "npm", "start" ]
