@@ -37,14 +37,11 @@ def connections_handler(payload):
     connection_id = payload["connection_id"]
     print("Connection message", payload, connection_id)
     STATE = payload['state']
-    # print(colored("Current state for ConnectionId {} is {}".format(connection_id, STATE), "magenta", attrs=["bold"]))
-    # while STATE != 'active':
-    #     # print(colored("ConnectionId {0} is not in active state yet".format(connection_id), "yellow", attrs=["bold"]))
-    #     # loop = asyncio.get_event_loop()
-    #
-    #     # trust_ping = loop.run_until_complete(agent_controller.messaging.trust_ping(connection_id, 'hello!'))
-    #     # print(colored("Trust ping send to ConnectionId {0} to activate connection".format(trust_ping), "blue",attrs=["bold"]))
-    #     time.sleep(5)
+    if STATE == "response":
+
+        loop = asyncio.get_event_loop()
+        trust_ping = loop.create_task(agent_controller.messaging.trust_ping(connection_id, 'hello!'))
+
 
 connection_listener = {
     "handler": connections_handler,
