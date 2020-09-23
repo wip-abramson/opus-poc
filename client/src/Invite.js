@@ -7,10 +7,10 @@ const Invite = () => {
     React.useEffect(() => {
         console.log("USE EFFECT")
         createInvite().then(response => {
-            console.log(response.data)
+            console.log(response)
             // console.log(btoa(response.data))
             // console.log(atob(response.data))
-            setInviteUrl(response.data)
+            setInviteUrl(response.data.invite_url)
         }).catch(error => {
             console.log("ERROR", error)
         })

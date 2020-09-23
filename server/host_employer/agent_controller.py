@@ -31,6 +31,9 @@ cred_listener = {
     "handler": cred_handler
 }
 
+unique_strings = []
+
+
 
 def connections_handler(payload):
     global STATE
