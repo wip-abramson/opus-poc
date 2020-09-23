@@ -7,7 +7,9 @@ const instance = axios.create({
 });
 
 export function createInvite() {
+    console.log("Request Create intvite")
     const path = "/invite"
     return instance.get(path)
 }
+
 

@@ -1,9 +1,9 @@
 
 import os
-import colored
+
 import time
+import asyncio
 from aries_basic_controller import AriesAgentController
-from aries_basic_controller.controllers.connections import ConnectionsController
 
 WEBHOOK_HOST = os.getenv('WEBHOOK_HOST')
 WEBHOOK_PORT = os.getenv('WEBHOOK_PORT')
@@ -37,11 +37,13 @@ def connections_handler(payload):
     connection_id = payload["connection_id"]
     print("Connection message", payload, connection_id)
     STATE = payload['state']
-    print(colored("Current state for ConnectionId {} is {}".format(connection_id, STATE), "magenta", attrs=["bold"]))
+    # print(colored("Current state for ConnectionId {} is {}".format(connection_id, STATE), "magenta", attrs=["bold"]))
     while STATE != 'active':
-        print(colored("ConnectionId {0} is not in active state yet".format(connection_id), "yellow", attrs=["bold"]))
-        trust_ping = await agent_controller.messaging.trust_ping(connection_id, 'hello!')
-        print(colored("Trust ping send to ConnectionId {0} to activate connection".format(trust_ping), "blue",attrs=["bold"]))
+        # print(colored("ConnectionId {0} is not in active state yet".format(connection_id), "yellow", attrs=["bold"]))
+        # loop = asyncio.get_event_loop()
+
+        # trust_ping = loop.run_until_complete(agent_controller.messaging.trust_ping(connection_id, 'hello!'))
+        # print(colored("Trust ping send to ConnectionId {0} to activate connection".format(trust_ping), "blue",attrs=["bold"]))
         time.sleep(5)
 
 connection_listener = {

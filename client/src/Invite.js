@@ -1,23 +1,27 @@
 import React from 'react'
 import {createInvite} from "./api/connections";
+import QrCode from './QrCode'
 
 const Invite = () => {
-    let [base64qr, setBase64qr] = React.useState(null)
+    let [inviteUrl, setInviteUrl] = React.useState(null)
     React.useEffect(() => {
+        console.log("USE EFFECT")
         createInvite().then(response => {
             console.log(response.data)
             // console.log(btoa(response.data))
             // console.log(atob(response.data))
-            setBase64qr(response.data)
-        }, [])
-    })
+            setInviteUrl(response.data)
+        }).catch(error => {
+            console.log("ERROR", error)
+        })
+    }, [])
 
-    return base64qr ? (
+    return inviteUrl ? (
         <div className="qr-code">
-            <img src={"data:image/png;base64, " + base64qr} />
+            <QrCode url={inviteUrl}/>
         </div>
     ) : (
-        <div>This is an invite</div>
+        <div>Loading invite</div>
     )
 }
 
