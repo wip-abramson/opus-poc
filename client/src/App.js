@@ -36,7 +36,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
           {
               connectionActive ?
-                  <OpusForm connectionId={connectionId} ownershipProof={}/>
+                  <OpusForm connectionId={connectionId} ownershipProof={ownershipProof}/>
                   : <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/>
           }
         <a
