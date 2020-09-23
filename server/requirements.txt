@@ -4,3 +4,5 @@ aries-basic-controller
 colored
 qrcode
 aiohttp_cors
+requests
+bs4

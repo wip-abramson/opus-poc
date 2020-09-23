@@ -1,6 +1,8 @@
 from aiohttp import web
 import async_timeout
 from agent_controller import agent_controller
+import requests
+from bs4 import BeautifulSoup
 
 
 async def index(request):
