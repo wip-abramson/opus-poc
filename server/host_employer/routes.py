@@ -1,6 +1,7 @@
-from views import index, invite, check_active
+from views import index, invite, check_active, github_openmined_credential
 
 def setup_routes(app):
     app.router.add_get('/', index)
     app.router.add_get('/invite', invite)
     app.router.add_get('/connection/{conn_id}/active', check_active)
+    app.router.add_post('/credential/github/openmined', github_openmined_credential)

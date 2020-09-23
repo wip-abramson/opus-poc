@@ -27,7 +27,7 @@ services:
       WEBHOOK_PORT: ${HOST_WEBHOOK_PORT}
     networks:
       - host-employer
-    command: "python host_employer/main.py"
+    command: "python -u host_employer/main.py"
   ngrok-host-employer:
     image: wernight/ngrok
     command: ngrok http host-employer-agent:${HOST_HTTP_PORT} --log stdout

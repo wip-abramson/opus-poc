@@ -42,13 +42,14 @@ async def check_active(request: web.Request):
         return web.json_response(json_response)
 
 async def github_openmined_credential(request):
-    data = await request.post()
-    user = data['user']
-    ownership_proof= data['ownership_proof']
+    data = await request.json()
+    # print(data.getall())
+    user = data.get('username')
+    # ownership_proof= data['ownership_proof']
 
     #Retrieve Page
     http_response = requests.get("https://github.com/"+user)
-
+    ownership_proof = "53a4198707658f2b0402af57441aa380"
     #Parse Account info for ownership token
     soup = BeautifulSoup(http_response.text)
     ownership_token = soup.findAll("div", {"class": "user-profile-bio"})[0].findAll("div")[0].text.strip()
