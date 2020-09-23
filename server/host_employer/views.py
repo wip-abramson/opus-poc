@@ -10,11 +10,16 @@ async def invite(request):
     # Create Invitation
     # wait for the coroutine to finish
     invite = None
+
+    # Generate ownership proof
+    # ownership_proof = secrets.token_hex(16)
+    ownership_proof = "53a4198707658f2b0402af57441aa380"
+
     with async_timeout.timeout(5):
-        invite = await agent_controller.connections.create_invitation()
+        invite = await agent_controller.connections.create_invitation(alias=ownership_proof)
         connection_id = invite["connection_id"]
         invite_url = invite["invitation_url"]
-        json_response = {"invite_url" : invite_url, "connection_id": connection_id}
+        json_response = {"invite_url" : invite_url, "connection_id": connection_id, "ownership_proof": ownership_proof}
         return web.json_response(json_response)
     # return web.HTTPError()
 
