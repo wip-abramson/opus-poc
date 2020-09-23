@@ -4,7 +4,7 @@ import QrCode from './QrCode'
 
 
 
-const Invite = ({setConnectionId}) => {
+const Invite = ({setConnectionId, setOwnershipProof}) => {
     let [inviteUrl, setInviteUrl] = React.useState(null)
     React.useEffect(() => {
         console.log("USE EFFECT")
@@ -15,6 +15,7 @@ const Invite = ({setConnectionId}) => {
             setInviteUrl(response.data.invite_url)
             let connectionId = response.data.connection_id
             setConnectionId(connectionId)
+            setOwnershipProof(response.data.ownership_proof)
 
         }).catch(error => {
             console.log("ERROR", error)

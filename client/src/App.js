@@ -3,11 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import Invite from './Invite';
 import {checkActive} from "./api/connections";
+import OpusForm from "./OpusForm";
 
 function App() {
 
   let [connectionId, setConnectionId] = React.useState(null)
     let [connectionActive, setConnectionActive] = React.useState(false)
+    let [ownershipProof, setOwnershipProof] = React.useState(null)
 
     React.useEffect(() => {
 
@@ -32,7 +34,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Invite setConnectionId={setConnectionId}/>
+          {
+              connectionActive ?
+                  <OpusForm connectionId={connectionId} ownershipProof={}/>
+                  : <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/>
+          }
         <a
           className="App-link"
           href="https://reactjs.org"
