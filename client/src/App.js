@@ -4,28 +4,29 @@ import './App.css';
 import Invite from './Invite';
 import {checkActive} from "./api/connections";
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-
 function App() {
 
   let [connectionId, setConnectionId] = React.useState(null)
     let [connectionActive, setConnectionActive] = React.useState(false)
+
     React.useEffect(() => {
-        const interval = setInterval(() => {
-            console.log('This will run every second!');
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
-    React.useEffect(() => {
-        if (connectionId) {
-            checkActive(connectionId).then(response => {
-                console.log("ACTIVE", response.data.active)
-                setConnectionActive(response.data.active)
-            })
+
+        if (connectionId && !connectionActive) {
+            const interval = setInterval(() => {
+                checkActive(connectionId).then(response => {
+                    console.log("ACTIVE", response.data.active)
+                    if (response.data.active) {
+                        setConnectionActive(response.data.active)
+                        return () => clearInterval(interval);
+                    }
+
+                })
+            }, 2000);
+            return () => clearInterval(interval);
         }
 
-    }, [connectionId])
+
+    }, [connectionId, connectionActive])
 
   return (
     <div className="App">

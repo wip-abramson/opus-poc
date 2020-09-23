@@ -21,7 +21,8 @@ async def invite(request):
 
 async def check_active(request: web.Request):
 
-    connection_id = request.rel_url.query["conn_id"]
+    connection_id = request.match_info["conn_id"]
+
     with async_timeout.timeout(2):
 
         connection = await agent_controller.connections.get_connection(connection_id)
