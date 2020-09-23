@@ -12,4 +12,9 @@ export function createInvite() {
     return instance.get(path)
 }
 
+export function checkActive(connectionId) {
+    const path = `/connection/${connectionId}/active`
+
+    return instance.get(path)
+}
 

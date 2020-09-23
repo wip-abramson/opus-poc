@@ -4,7 +4,7 @@ import os
 import time
 import asyncio
 from aries_basic_controller import AriesAgentController
-
+from aries_basic_controller.controllers.connections import ConnectionsController
 WEBHOOK_HOST = os.getenv('WEBHOOK_HOST')
 WEBHOOK_PORT = os.getenv('WEBHOOK_PORT')
 WEBHOOK_BASE = os.getenv('WEBHOOK_BASE')
