@@ -11,8 +11,6 @@ services:
       - 3000:3000
     networks:
       - host-employer
-    depends_on:
-      - host-employer-agent
   server:
     build:
       context: server
@@ -27,7 +25,11 @@ services:
       WEBHOOK_PORT: ${HOST_WEBHOOK_PORT}
     networks:
       - host-employer
-    command: "python -u host_employer/main.py"
+    entrypoint: /bin/bash
+    command: [
+      "-c",
+      "python -u host_employer/main.py;"
+    ]
   ngrok-host-employer:
     image: wernight/ngrok
     command: ngrok http host-employer-agent:${HOST_HTTP_PORT} --log stdout

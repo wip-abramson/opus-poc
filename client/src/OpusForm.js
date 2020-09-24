@@ -10,7 +10,8 @@ const OpusForm = ({connectionId, ownershipProof}) => {
     let requestCredential = () => {
         let path = "/credential/github/openmined"
         instance.post(path, {
-            "username": username
+            "username": username,
+            "connection_id": connectionId
         }).then(response => {
             console.log(response)
         }).catch(error => {

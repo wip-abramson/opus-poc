@@ -6,3 +6,4 @@ qrcode
 aiohttp_cors
 requests
 bs4
+
