@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Invite from './Invite';
 import {checkActive} from "./api/connections";
-import OpusForm from "./OpusForm";
+import IssueCredential from "./IssueCredential";
 
 function App() {
 
@@ -33,20 +33,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+          <h2>OpenMined OPUS Demo</h2>
+
           {
               connectionActive ?
-                  <OpusForm connectionId={connectionId} ownershipProof={ownershipProof}/>
-                  : <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/>
+
+                  <IssueCredential connectionId={connectionId} ownershipProof={ownershipProof}/>
+                  : <>
+                      <h3>Scan this QrCode to make a connection</h3>
+                      <div>
+                          You should be able to use any of the following apps:
+                          <ul>
+                              <li>esatus</li>
+                              <li>Trinsic</li>
+                              <li>Connect.Me</li>
+                          </ul>
+                      </div>
+                      <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/></>
           }
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          TEST THE CONTROLLER
-        </a>
       </header>
     </div>
   );

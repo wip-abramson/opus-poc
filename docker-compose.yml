@@ -41,7 +41,7 @@ services:
       dockerfile: Dockerfile
     environment:
       NGROK_NAME: ngrok-host-employer
-      AGENT_NAME: Blackpool Teaching Hospital
+      AGENT_NAME: OpenMined
       PORT: ${HOST_HTTP_PORT}
       ADMIN_PORT: ${HOST_ADMIN_PORT}
       WEBHOOK_URL: ${HOST_WEBHOOK_URL}

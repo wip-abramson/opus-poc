@@ -101,13 +101,17 @@ async def initialise():
     response = await agent_controller.wallet.assign_public_did(did_object["did"])
     print(response)
 
-    response = await agent_controller.definitions.write_cred_def(config.schema_id)
+    response = await agent_controller.definitions.write_cred_def(config.om_member_schema_id)
 
 
-    config.cred_def_id = response["credential_definition_id"]
-    print(config.cred_def_id)
+    config.om_member_cred_def_id = response["credential_definition_id"]
+    print("OM Member Cred Def", config.om_member_cred_def_id)
+
+    response = await agent_controller.definitions.write_cred_def(config.prycon_schema_id)
 
 
+    config.prycon_cred_def_id = response["credential_definition_id"]
+    print("OM Member Cred Def", config.prycon_cred_def_id)
 
 
 

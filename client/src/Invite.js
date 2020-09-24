@@ -1,5 +1,5 @@
 import React from 'react'
-import {createInvite, checkActive} from "./api/connections";
+import {createInvite} from "./api/connections";
 import QrCode from './QrCode'
 
 

@@ -101,9 +101,33 @@ async def github_openmined_credential(request):
 
             record = await agent_controller.issuer.send_credential(connection_id, config.schema_id, config.cred_def_id, credential_attributes, trace=False)
             print(record)
-            return web.Response(text="linked to OpenMined.", content_type='text/html')
+            return web.Response(text="linked to OpenMined.", status=200, content_type='text/html')
 
         else:
-            return web.Response(text="Unable to link to OpenMined.", content_type='text/html')
+            return web.Response(text="Unable to link to OpenMined.", status=400, content_type='text/html')
     else:
-        return web.Response(text="Unable to link.", content_type='text/html')
+        return web.Response(text="Unable to link.", status=400, content_type='text/html')
+
+
+async def prycon_attendance(request):
+    data = await request.json()
+    # print(data.getall())
+    name = data.get('name')
+    connection_id = data.get('connection_id')
+
+    date = datetime.datetime.today()
+    day = date.strftime('%d')
+    month = date.strftime('%m')
+    year = date.strftime('%Y')
+
+
+    credential_attributes = [
+        {"name": "conference", "value": "OpenMined PryCon 2020"},
+        {"name": "name", "value": name},
+        {"name": "issued", "value": f"{day}/{month}/{year}"}
+    ]
+
+    record = await agent_controller.issuer.send_credential(connection_id, config.prycon_schema_id, config.prycon_cred_def_id,
+                                                           credential_attributes, trace=False)
+
+    return web.Response(text="PryCon Credential Offered", status=200, content_type='text/html')
