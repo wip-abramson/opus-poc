@@ -45,18 +45,21 @@ function App() {
                   <IssueCredential connectionId={connectionId} ownershipProof={ownershipProof}/>
                   : <>
                       <h3>Scan this QrCode to make a connection:</h3>
-                      <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/></>
+                      <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/>
+                      <p className="instructions">
+                          You should be able to use any of the following apps:
+                          <ul>
+                              <li>Trinsic</li>
+                              <li>esatus</li>
+                              <li>Connect.Me</li>
+                          </ul>
+                          Once you connect, you will be redirected to the appropriate page. If connection times out, try
+                          refreshing the page and try again. Make sure to set your network to the Sovrin Staging Network.
+                      </p>
+                  </>
           }
 
-          <p class="instructions">
-              You should be able to use any of the following apps:
-              <ul>
-                  <li>Trinsic</li>
-                  <li>esatus</li>
-                  <li>Connect.Me</li>
-              </ul>
-              Once you connect, you will be redirected to the appropriate page. If connection times out, try refreshing the page and try again. Make sure to set your network to the Sovrin Staging Network.
-          </p>
+
       </header>
     </div>
   );

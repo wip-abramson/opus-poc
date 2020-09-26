@@ -77,7 +77,6 @@ async def github_openmined_credential(request):
         print(orgDivs)
         orgsSection = orgDivs[0].findAll('img')
         myOrgs = set(tag['alt'] for tag in orgsSection)
-        print("ORGS: "+myOrgs)
 
         # If the user is a member of OpenMined
         if '@OpenMined' in myOrgs:
@@ -98,9 +97,9 @@ async def github_openmined_credential(request):
                 # - link connection in this session to connection initiated previously
                 # - define credential and scheme on ledger
 
-            print("Issuing ", config.schema_id, config.cred_def_id)
+            print("Issuing ", config.om_member_schema_id, config.om_member_cred_def_id)
 
-            record = await agent_controller.issuer.send_credential(connection_id, config.schema_id, config.cred_def_id, credential_attributes, trace=False)
+            record = await agent_controller.issuer.send_credential(connection_id, config.om_member_schema_id, config.om_member_cred_def_id, credential_attributes, trace=False)
             print(record)
             return web.Response(text="linked to OpenMined.", status=200, content_type='text/html')
 

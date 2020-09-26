@@ -12,7 +12,7 @@ const IssueCredential = ({connectionId, ownershipProof}) => {
     </div>) : (
         <div>
             <h3>Issue yourself a credential</h3>
-            <button onClick={() => setContributorView(!contributorView)}>{contributorView ? "Issue OpenMined Contributor" : "Issue OpenMined Contributor Credential"}</button>
+            <button onClick={() => setContributorView(!contributorView)}>{contributorView ? "Issue OpenMined PryCon Attendance" : "Issue OpenMined Contributor Credential"}</button>
 
             {contributorView ?
                 <OpusForm connectionId={connectionId} ownershipProof={ownershipProof} setCredOffered={setCredOffered}/> :
