@@ -10,7 +10,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - host-employer
+      - opus
   server:
     build:
       context: server
@@ -21,26 +21,26 @@ services:
 
     environment:
       WEBHOOK_HOST: 0.0.0.0
-      ADMIN_URL: http://host-employer-agent:${HOST_ADMIN_PORT}
+      ADMIN_URL: http://opus-agent:${HOST_ADMIN_PORT}
       WEBHOOK_PORT: ${HOST_WEBHOOK_PORT}
     networks:
-      - host-employer
+      - opus
     entrypoint: /bin/bash
     command: [
       "-c",
       "python -u host_employer/main.py;"
     ]
-  ngrok-host-employer:
+  ngrok-opus:
     image: wernight/ngrok
-    command: ngrok http host-employer-agent:${HOST_HTTP_PORT} --log stdout
+    command: ngrok http opus-agent:${HOST_HTTP_PORT} --log stdout
     networks:
-      - host-employer
-  host-employer-agent:
+      - opus
+  opus-agent:
     build:
       context: agent
       dockerfile: Dockerfile
     environment:
-      NGROK_NAME: ngrok-host-employer
+      NGROK_NAME: ngrok-opus
       AGENT_NAME: OpenMined
       PORT: ${HOST_HTTP_PORT}
       ADMIN_PORT: ${HOST_ADMIN_PORT}
@@ -49,6 +49,6 @@ services:
       - ${HOST_HTTP_PORT}:${HOST_HTTP_PORT}
       - ${HOST_ADMIN_PORT}:${HOST_ADMIN_PORT}
     networks:
-      - host-employer
+      - opus
 networks:
-  host-employer:
+  opus:

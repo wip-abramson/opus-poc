@@ -46,6 +46,8 @@ def connections_handler(payload):
 
         loop = asyncio.get_event_loop()
         trust_ping = loop.create_task(agent_controller.messaging.trust_ping(connection_id, 'hello!'))
+        time.sleep(3)
+        trust_ping = loop.create_task(agent_controller.messaging.trust_ping(connection_id, 'hello!'))
 
 
 connection_listener = {
