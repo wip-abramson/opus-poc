@@ -33,24 +33,30 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-          <h2>OpenMined OPUS Demo</h2>
+      <img class="logo_text" src="logo_text.png" alt="Logo"></img>
+      <div class="disclaimer">Experimental</div>
+
+          <div><h2><img class="logo" src="logo.png" alt="Logo"></img>OpenMined OPUS Demo</h2></div>
+
 
           {
               connectionActive ?
 
                   <IssueCredential connectionId={connectionId} ownershipProof={ownershipProof}/>
                   : <>
-                      <h3>Scan this QrCode to make a connection</h3>
-                      <div>
-                          You should be able to use any of the following apps:
-                          <ul>
-                              <li>esatus</li>
-                              <li>Trinsic</li>
-                              <li>Connect.Me</li>
-                          </ul>
-                      </div>
+                      <h3>Scan this QrCode to make a connection:</h3>
                       <Invite setConnectionId={setConnectionId} setOwnershipProof={setOwnershipProof}/></>
           }
+
+          <p class="instructions">
+              You should be able to use any of the following apps:
+              <ul>
+                  <li>Trinsic</li>
+                  <li>esatus</li>
+                  <li>Connect.Me</li>
+              </ul>
+              Once you connect, you will be redirected to the appropriate page. If connection times out, try refreshing the page and try again. Make sure to set your network to the Sovrin Staging Network.
+          </p>
       </header>
     </div>
   );
