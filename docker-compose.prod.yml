@@ -36,7 +36,7 @@ services:
     environment:
       AGENT_NAME: OpenMined
       PORT: ${HOST_HTTP_PORT}
-      ENDPOINT: http://194.61.21.227:${HOST_HTTP_PORT}
+      ENDPOINT: http://194.61.21.227
       ADMIN_PORT: ${HOST_ADMIN_PORT}
       WEBHOOK_URL: ${HOST_WEBHOOK_URL}
     ports:
