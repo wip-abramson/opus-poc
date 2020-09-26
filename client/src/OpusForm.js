@@ -25,7 +25,7 @@ const OpusForm = ({connectionId, ownershipProof, setCredOffered}) => {
 
     return issuerError ? (
             <div>
-                <h1>Unfortunately we ran into an error</h1>
+                <h1>Unfortunately we could not process your OpenMined credential</h1>
                 <h2>Perhaps try issuing the PryCon attendance credential instead.</h2>
             </div>
         )
