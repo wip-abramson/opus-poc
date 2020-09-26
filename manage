@@ -66,6 +66,13 @@ DEFAULT_CONTAINERS="client server
                     opus-agent ngrok-opus"
 
 # -----------------------------------------------------------------------------------------------------------------
+# Production Settings:
+# -----------------------------------------------------------------------------------------------------------------
+PRODUCTION_CONTAINERS="client server
+                    opus-agent"
+
+
+# -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
 function echoRed() {
@@ -131,7 +138,6 @@ configureEnvironment() {
 
 
 
-
 }
 
 getInputParams() {
@@ -149,6 +155,31 @@ getInputParams() {
   done
 
   echo ${ARGS}
+}
+
+getProductionParams() {
+  CONTAINERS=""
+  ARGS=""
+
+  for arg in $@; do
+    case "$arg" in
+    *=*)
+      # Skip it
+      ;;
+    -*)
+      ARGS+=" $arg"
+      ;;
+    *)
+      CONTAINERS+=" $arg"
+      ;;
+    esac
+  done
+
+  if [ -z "$CONTAINERS" ]; then
+    CONTAINERS="$PRODUCTION_CONTAINERS"
+  fi
+
+  echo ${ARGS} ${CONTAINERS}
 }
 
 getStartupParams() {
@@ -245,6 +276,19 @@ start | up)
   _startupParams=$(getStartupParams $@)
   configureEnvironment "$@"
   docker-compose\
+  --log-level ERROR up \
+  --build --remove-orphans \
+  -d ${_startupParams}
+  docker-compose \
+  --log-level ERROR logs \
+  -f
+  ;;
+production)
+  echoYellow "Starting up... This can take a couple of minutes."
+  _startupParams=$(getProductionParams $@)
+  configureEnvironment "$@"
+  docker-compose\
+  -f docker-compose.prod.yml \
   --log-level ERROR up \
   --build --remove-orphans \
   -d ${_startupParams}

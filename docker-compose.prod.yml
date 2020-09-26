@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  client:
+    build:
+      context: client
+      dockerfile: Dockerfile.prod
+    ports:
+      - '80:80'
+    networks:
+      - opus
+  server:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+      - ${HOST_WEBHOOK_PORT}:${HOST_WEBHOOK_PORT}
+
+    environment:
+      WEBHOOK_HOST: 0.0.0.0
+      ADMIN_URL: http://opus-agent:${HOST_ADMIN_PORT}
+      WEBHOOK_PORT: ${HOST_WEBHOOK_PORT}
+    networks:
+      - opus
+    entrypoint: /bin/bash
+    command: [
+      "-c",
+      "python -u opus/main.py;"
+    ]
+  opus-agent:
+    build:
+      context: agent
+      dockerfile: Dockerfile.prod
+    environment:
+      AGENT_NAME: OpenMined
+      PORT: ${HOST_HTTP_PORT}
+      ADMIN_PORT: ${HOST_ADMIN_PORT}
+      WEBHOOK_URL: ${HOST_WEBHOOK_URL}
+    ports:
+      - ${HOST_HTTP_PORT}:${HOST_HTTP_PORT}
+      - ${HOST_ADMIN_PORT}:${HOST_ADMIN_PORT}
+    networks:
+      - opus
+networks:
+  opus:
