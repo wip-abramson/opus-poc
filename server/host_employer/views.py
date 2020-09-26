@@ -77,6 +77,7 @@ async def github_openmined_credential(request):
         print(orgDivs)
         orgsSection = orgDivs[0].findAll('img')
         myOrgs = set(tag['alt'] for tag in orgsSection)
+        print("ORGS: "+myOrgs)
 
         # If the user is a member of OpenMined
         if '@OpenMined' in myOrgs:

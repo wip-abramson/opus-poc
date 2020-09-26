@@ -23,8 +23,8 @@ const PryConForm = ({setCredOffered, connectionId}) => {
 
    return (
        <div>
-           <h1>Thanks for attending PryCon!</h1>
-           <h2>Issue yourself a proof of attendance here. Just for fun :)</h2>
+           <h2>Thanks for attending PryCon!</h2>
+           <h3>Issue yourself a proof of attendance here. Just for fun :)</h3>
            <input placeholder={"name"} value={name} onChange={(e) => setName(e.target.value)}/>
            <button onClick={requestPryConCred}>Request</button>
        </div>

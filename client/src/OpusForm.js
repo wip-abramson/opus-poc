@@ -31,11 +31,12 @@ const OpusForm = ({connectionId, ownershipProof, setCredOffered}) => {
         )
         :(
         <div>
-            <h1>Are you an OpenMined Contributor on GitHub?</h1>
-            <h2>Help us test out our OPUS service and get a verifiable credential at the same time</h2>
+            <h2>Are you an OpenMined Contributor on GitHub?</h2>
+            <h3>Help us test out our OPUS service and get a verifiable credential at the same time</h3>
             <h3>Note: You must have you OpenMined organisation membership <a href="https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/publicizing-or-hiding-organization-membership"> set to public in GitHub</a></h3>
-            <h2>First paste this ownership proof token into your GitHub profile:</h2>
-            <h3>{ownershipProof}</h3>
+            <h3>First paste this ownership proof token into your GitHub profile:</h3>
+            <img class="" src="github_ownership.png" alt="demo"></img>
+            <h4>"{ownershipProof}"</h4>
             <div>Enter your Github username and request credential when ready</div>
             <input type="text" placeholder="Github Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <button onClick={() => requestCredential()}>Submit</button>
