@@ -28,7 +28,7 @@ services:
     entrypoint: /bin/bash
     command: [
       "-c",
-      "python -u host_employer/main.py;"
+      "python -u opus/main.py;"
     ]
   ngrok-opus:
     image: wernight/ngrok
